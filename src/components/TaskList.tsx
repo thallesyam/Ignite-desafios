@@ -48,6 +48,10 @@ export function TaskList() {
     setTasks(removeTask);
   }
 
+  function handleRemoveAllTasks() {
+    setTasks([]);
+  }
+
   return (
     <section className="task-list container">
       <header>
@@ -71,6 +75,12 @@ export function TaskList() {
       </header>
 
       <main>
+        <section className="remove-container">
+          <button onClick={handleRemoveAllTasks} className="btn-remove-all">
+            <FiTrash size={18} />
+            Remover todos
+          </button>
+        </section>
         <ul>
           {tasks.map((task) => (
             <li key={task.id}>
