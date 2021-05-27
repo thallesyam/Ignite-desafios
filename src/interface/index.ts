@@ -16,3 +16,8 @@ export interface FoodProps {
 export interface Headerinterface {
   openModal: () => void
 }
+
+export interface InputInterface {
+  name: string
+  icon: any
+}
