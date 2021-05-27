@@ -1,3 +1,5 @@
+import React from 'react'
+
 export interface FoodInterface {
   id: number
   price: number
@@ -20,4 +22,10 @@ export interface Headerinterface {
 export interface InputInterface {
   name: string
   icon: any
+}
+
+export interface Modalinterface {
+  children: React.ReactNode
+  isOpen: boolean
+  setIsOpen: () => void
 }
