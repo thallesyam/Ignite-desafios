@@ -12,3 +12,7 @@ export interface FoodProps {
   handleEditFood: (food: FoodInterface) => void
   handleDelete: (id: number) => void
 }
+
+export interface Headerinterface {
+  openModal: () => void
+}
