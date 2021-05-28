@@ -41,5 +41,5 @@ export interface ModalEditInterface {
   isOpen: boolean
   setIsOpen: () => void
   editingFood: any
-  handleUpdateFood: (data: FormData) => void
+  handleUpdateFood: any
 }
