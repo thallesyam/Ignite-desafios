@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 
 import Header from '../../components/Header';
 import api from '../../services/api';
@@ -6,40 +6,41 @@ import Food from '../../components/Food';
 import ModalAddFood from '../../components/ModalAddFood';
 import ModalEditFood from '../../components/ModalEditFood';
 import { FoodsContainer } from './styles';
+import { FoodProps } from '../../interface/index';
 
-class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      foods: [],
-      editingFood: {},
-      modalOpen: false,
-      editModalOpen: false,
+const Dashboard = () => {
+  const [foods, setFoods] = useState<FoodProps[]>([])
+  const [editingFood, setEditingFood] = useState({})
+  const [modalOpen, setModalOpen] = useState(false)
+  const [editModalOpen, setEditModalOpen] = useState(false)
+
+  useEffect(() => {
+    async function loadFoods () {
+      const response = await api.get('/foods');
+
+      setFoods(response.data)
     }
-  }
 
-  async componentDidMount() {
-    const response = await api.get('/foods');
+    loadFoods()
 
-    this.setState({ foods: response.data });
-  }
+  }, [])
 
-  handleAddFood = async food => {
-    const { foods } = this.state;
 
+  const handleAddFood = async (food: FoodProps) => {
     try {
       const response = await api.post('/foods', {
         ...food,
         available: true,
       });
 
-      this.setState({ foods: [...foods, response.data] });
+      setFoods([...foods, response.data])
+
     } catch (err) {
       console.log(err);
     }
   }
 
-  handleUpdateFood = async food => {
+  const handleUpdateFood = async (food: FoodProps) => {
     const { foods, editingFood } = this.state;
 
     try {

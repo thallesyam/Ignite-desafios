@@ -20,12 +20,26 @@ export interface Headerinterface {
 }
 
 export interface InputInterface {
-  name: string
-  icon: any
+  name?: any
+  icon?: any
+  placeholder?: string
 }
 
 export interface Modalinterface {
   children: React.ReactNode
   isOpen: boolean
   setIsOpen: () => void
+}
+
+export interface ModalAddFoodInterface {
+  setIsOpen: () => void
+  handleAddFood: (data: any) => void
+  isOpen: boolean
+}
+
+export interface ModalEditInterface {
+  isOpen: boolean
+  setIsOpen: () => void
+  editingFood: any
+  handleUpdateFood: (data: FormData) => void
 }
