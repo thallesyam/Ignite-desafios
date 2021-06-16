@@ -11,10 +11,13 @@
   --pink: #ff57b2;
   --gray-300: #f8f8f8;
   --gray-500: #d7d7d7;
+  --gray-600: #bbbbbb;
 }
 
 body {
   font-family: 'Inter', sans-serif;
+
+  background: var(--black-500);
 }
 
 @media (max-width: 1080px) {
