@@ -5,6 +5,12 @@
     width: 100%;
     margin-bottom: 3rem;
 
+    transition: 0.2s;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
+
     h1 {
       font-size: 1.75rem;
       font-weight: 700;
@@ -43,6 +49,21 @@
           color: var(--gray-600);
         }
       }
+    }
+  }
+
+  .buttonGetPosts {
+    margin-top: 4rem;
+    font-weight: 600;
+    color: #ff57b2;
+
+    font-size: 1.125rem;
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    &:hover {
+      filter: brightness(0.8);
     }
   }
 }
