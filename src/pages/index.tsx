@@ -1,9 +1,6 @@
 import { GetStaticProps } from 'next';
 import { useState } from 'react';
 
-import { format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
-
 import Prismic from '@prismicio/client';
 import { getPrismicClient } from '../services/prismic';
 
@@ -40,7 +37,6 @@ const options = {
   month: 'short',
   day: 'numeric',
   timeZone: 'UTC',
-  dateStyle: 'medium',
 };
 
 function FormatPosts(posts: PostPagination): Post[] {
@@ -86,7 +82,7 @@ export default function Home({ finalProps }) {
 
       <section className={`${commonStyles.container} ${styles.postsContainer}`}>
         {posts.map(post => (
-          <Link key={post.uid} href={`/posts/${post.uid}`}>
+          <Link key={post.uid} href={`/post/${post.uid}`}>
             <a>
               <div className={styles.post}>
                 <h1>{post.data.title}</h1>
