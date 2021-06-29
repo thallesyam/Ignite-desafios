@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import styles from './header.module.scss';
+import Logo from '../../assets/Logo';
 
 export default function Header() {
   return (
@@ -8,7 +9,7 @@ export default function Header() {
       <div className={styles.wrapper}>
         <Link href="/">
           <a>
-            <img src="/images/Logo.svg" alt="logo" />
+            <Logo />
           </a>
         </Link>
       </div>
