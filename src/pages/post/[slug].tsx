@@ -11,7 +11,11 @@ import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
 import Head from 'next/head';
 
+import { ptBR } from 'date-fns/locale';
+import fmt from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
 import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
+import { useRouter } from 'next/router';
 
 interface Post {
   first_publication_date: string | null;
@@ -43,64 +47,54 @@ const options = {
 };
 
 export default function Post({ post }: PostProps) {
-  const average_reading_time_calc = post.data.content.reduce((acc, content) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <h1>Carregando...</h1>;
+  }
+  const readingTime = post.data.content.reduce((acc, content) => {
     const textBody = RichText.asText(content.body);
     const split = textBody.split(' ');
-    const number_words = split.length;
+    const numberWords = split.length;
 
-    const result = Math.ceil(number_words / 200);
+    const result = Math.ceil(numberWords / 200);
     return acc + result;
   }, 0);
-
-  const postWithDateFormatedAndReadingTime = {
-    ...post,
-    first_publication_date: new Intl.DateTimeFormat('pt-BR', options).format(
-      new Date(post.first_publication_date)
-    ),
-    last_publication_date: new Intl.DateTimeFormat('pt-BR', options).format(
-      new Date(post.last_publication_date)
-    ),
-    data: {
-      ...post.data,
-      average_reading_time: average_reading_time_calc,
-    },
-  };
-
-  const { data, first_publication_date, last_publication_date } =
-    postWithDateFormatedAndReadingTime;
-
-  const { author, banner, content, title, average_reading_time } = data;
 
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{post.data.title}</title>
       </Head>
       <Header />
       <section className={styles.container}>
-        <img src={banner.url} />
+        <img src={post.data.banner.url} />
 
         <main className={commonStyles.container}>
-          <h2>{title}</h2>
+          <h2>{post.data.title}</h2>
 
           <div className={styles.info}>
             <div>
               <FiCalendar />
-              <p>{first_publication_date}</p>
+              <p>
+                {fmt(parseISO(post.first_publication_date), 'dd MMM yyyy', {
+                  locale: ptBR,
+                })}
+              </p>
             </div>
 
             <div>
               <FiUser />
-              <p>{author}</p>
+              <p>{post.data.author}</p>
             </div>
 
             <div>
               <FiClock />
-              <p>{average_reading_time} Min</p>
+              <p>{readingTime} min</p>
             </div>
           </div>
 
-          {content.map(section => (
+          {post.data.content.map(section => (
             <section key={section.heading} className={styles.sectionContent}>
               <h2>{section.heading}</h2>
               <div
@@ -120,51 +114,58 @@ export default function Post({ post }: PostProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const prismic = getPrismicClient();
-  const posts = await prismic.query(
-    [Prismic.Predicates.at('document.type', 'post')],
-    {}
-  );
+  const posts = await prismic.query([
+    Prismic.predicates.at('document.type', 'post'),
+  ]);
 
-  const paths = posts.results.map(post => {
-    return {
-      params: { slug: post.uid },
-    };
-  });
+  const paths = posts.results.map(post => ({
+    params: { slug: post.uid },
+  }));
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug },
+  preview = false,
+  previewData,
+}) => {
   const prismic = getPrismicClient();
-  const { id, first_publication_date, last_publication_date, data } =
-    await prismic.getByUID('post', String(slug), {});
-
-  const content = data.content.map(content => {
-    return {
-      heading: content.heading,
-      body: [...content.body],
-    };
+  const response = await prismic.getByUID('post', String(slug), {
+    ref: previewData?.ref ?? null,
   });
 
+  if (!response) {
+    return {
+      notFound: true,
+    };
+  }
+
   const post = {
-    id,
-    first_publication_date,
-    last_publication_date,
+    first_publication_date: response.first_publication_date,
+    last_publication_date: response.last_publication_date,
+    uid: response.uid,
     data: {
-      title: data.title,
+      title: response.data.title,
+      subtitle: response.data.subtitle,
       banner: {
-        url: data.image.url,
+        url: response.data.banner.url,
       },
-      subtitle: data.subtitle,
-      author: data.author,
-      content,
+      author: response.data.author,
+      content: response.data.content,
     },
   };
 
   return {
-    props: { post },
+    props: {
+      post,
+      // preview,
+      // prevPost: prevPost ?? null,
+      // nextPost: nextPost ?? null,
+    },
+    revalidate: 60 * 60 * 24, // 24 Horas
   };
 };
