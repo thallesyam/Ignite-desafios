@@ -1,53 +1,103 @@
-.container {
+.hero {
+  margin-bottom: 4rem;
   width: 100%;
 
   img {
     width: 100%;
-    height: 400px;
-
     object-fit: cover;
-
-    margin-bottom: 5rem;
-  }
-
-  h2 {
-    font-weight: 700;
-    font-family: Inter;
-    color: var(--gray-300);
-    margin-bottom: 1.563rem;
+    max-height: 25rem;
   }
 }
-.info {
-  margin-bottom: 4rem;
 
-  display: flex;
+.post {
+  padding-bottom: 3rem;
 
-  div {
+  h1 {
+    font-weight: bold;
+    font-size: 3rem;
+  }
+
+  footer {
+    margin-top: 1rem;
+
     display: flex;
-    margin-right: 2.1rem;
+    align-items: center;
+    font-size: 0.875rem;
+
+    time {
+      display: flex;
+      align-items: center;
+      color: var(--info);
+
+      & + svg {
+        margin-left: 1rem;
+      }
+    }
+
+    span {
+      display: block;
+      color: var(--info);
+      & + svg {
+        margin-left: 1rem;
+      }
+    }
 
     svg {
-      color: var(--gray-600);
-    }
-
-    P {
-      margin-left: 0.625rem;
-      color: var(--gray-600);
+      margin-right: 0.5rem;
     }
   }
-}
-
-.heading {
-  color: var(--gray-300);
-  line-height: 25, 2px;
 }
 
 .content {
-  font-size: 1.125rem;
-  font-weight: 400;
-  font-family: Inter;
+  margin-top: 4rem;
+  text-align: justify;
 
-  color: var(--gray-600);
-  line-height: 25, 2px;
-  margin-bottom: 3rem;
+  h2 {
+    font-weight: bold;
+    font-size: 2.25rem;
+  }
+
+  article {
+    margin: 2.25rem 0;
+  }
+}
+
+.lastEdit {
+  display: block;
+  margin-top: 1rem;
+
+  font-size: 0.875rem;
+  color: var(--info);
+  font-style: italic;
+}
+
+.navigatePost {
+  width: 100%;
+  position: relative;
+  font-size: 1.125rem;
+  padding: 3rem 0;
+  margin-bottom: 4rem;
+  border-top: 1px solid var(--text);
+
+  span {
+    color: var(--highlight);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .prevPost {
+    position: absolute;
+    left: 0;
+  }
+
+  .nextPost {
+    position: absolute;
+    right: 0;
+    text-align: right;
+  }
 }
