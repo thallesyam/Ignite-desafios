@@ -15,9 +15,9 @@ export const Header = ({ isArrowBack = false }: HeaderProps) => {
       justify={`${isArrowBack ? 'space-between' : 'center'}`}
       p="6"
     >
-      {isArrowBack && <Image src="/arrowBack.svg" />}
+      {isArrowBack && <Image src="/arrowBack.svg" alt="Arrow Left" />}
 
-      <Image src="/logo.svg" />
+      <Image src="/logo.svg" alt="Logo" />
 
       <Box></Box>
     </Flex>
