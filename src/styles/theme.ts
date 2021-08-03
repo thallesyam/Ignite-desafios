@@ -24,6 +24,9 @@ export const theme = extendTheme({
       body: {
         bg: 'white.50',
         color: 'gray.900',
+        width: '100%',
+        maxWidth: '1440px',
+        margin: '0 auto',
       },
     },
   },

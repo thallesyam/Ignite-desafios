@@ -4,7 +4,7 @@ type HeaderProps = {
   isArrowBack?: boolean
 }
 
-export const Header = ({ isArrowBack = true }: HeaderProps) => {
+export const Header = ({ isArrowBack = false }: HeaderProps) => {
   return (
     <Flex
       as="header"
