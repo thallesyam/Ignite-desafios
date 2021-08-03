@@ -6,15 +6,19 @@ import {
   SimpleGrid,
   Heading,
   Center,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 
 export const Banner = () => {
-  const isMobile = false
+  const isMobileVersion = useBreakpointValue({
+    base: true,
+    lg: false,
+  })
 
-  if (isMobile) {
+  if (isMobileVersion) {
     return (
       <Flex w="100%" h="200px" pos="relative">
-        <Image src="/background.png" />
+        <Image w="100%" src="/background.png" />
 
         <Center w="100%" h="100%" pos="absolute">
           <Flex direction="column" align="center" justify="center" px="5">
@@ -34,7 +38,7 @@ export const Banner = () => {
 
   return (
     <Flex w="100%" pos="relative">
-      <Image src="/background.png" />
+      <Image w="100%" src="/background.png" />
 
       <Center w="100%" h="100%" pos="absolute">
         <SimpleGrid w="100%" columns={2}>
