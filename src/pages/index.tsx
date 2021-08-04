@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Heading, Stack, Text } from '@chakra-ui/react'
 
 import { Header } from '../components/Header'
 import { Banner } from '../components/Banner'
@@ -11,7 +11,22 @@ export default function Home() {
     <>
       <Header />
 
-      <Banner />
+      <Banner 
+        imagePrincipal="background"  
+        imageHighlight
+        isHome
+        grid={[1, 1, 2]}
+      >
+        <Stack spacing="5">
+          <Heading as="h2" fontSize={['xl', 'xl', '4xl']} color="white.50">
+          5 Continentes, <br /> infinitas possibilidades.
+          </Heading>
+          <Text fontSize={['sm', 'sm', 'xl']} color="white.300">
+            Chegou a hora de tirar do papel a viagem que você <br /> sempre sonhou. 
+          </Text>
+        </Stack>
+
+      </Banner>
 
       <TravelTypes />
 

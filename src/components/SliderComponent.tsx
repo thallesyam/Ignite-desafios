@@ -4,6 +4,8 @@ import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 's
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { continents } from '../data/continents';
+
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
 export const SliderComponent = () => {
@@ -19,50 +21,29 @@ export const SliderComponent = () => {
         style={{width: '100%', display: 'flex',flex: '1'}}
       > 
 
-        <SwiperSlide key={1}>
-          <Flex
-            w="100%"
-            h={['250px', '450px']}
-            align="center"
-            justify="center"
-            direction="column"
-            bgImage={`url('/europePage.png')`}
-            bgPosition="100% 30%"
-            bgRepeat="no-repeat"
-            bgSize="cover"
-            textAlign="center"
-          >
-            <Link href={`/`}>
-              <a>
-                <Heading fontSize={["3xl","4xl","5xl"]} color="gray.100" fontWeight="bold">Europa</Heading>
-                <Text fontWeight="bold" color="gray.300" fontSize={["0.8rem","1xl", "2xl"]} mt={["2","4"]}>{' '}</Text>
-              </a>
-            </Link>
-          </Flex>
-        </SwiperSlide>
-        
-        <SwiperSlide key={1}>
-          <Flex
-            w="100%"
-            h={['250px', '450px']}
-            align="center"
-            justify="center"
-            direction="column"
-            bgImage={`url('/europePage.png')`}
-            bgPosition="100% 30%"
-            bgRepeat="no-repeat"
-            bgSize="cover"
-            textAlign="center"
-          >
-            <Link href={`/`}>
-              <a>
-                <Heading fontSize={["3xl","4xl","5xl"]} color="gray.100" fontWeight="bold">Europa</Heading>
-                <Text fontWeight="bold" color="gray.300" fontSize={["0.8rem","1xl", "2xl"]} mt={["2","4"]}>{' '}</Text>
-              </a>
-            </Link>
-          </Flex>
-        </SwiperSlide>
-
+        { continents.map(continent => (
+          <SwiperSlide key={continent.id}>
+            <Flex
+              w="100%"
+              h={['250px', '450px']}
+              align="center"
+              justify="center"
+              direction="column"
+              bgImage={`url('/${continent.image}.png')`}
+              bgPosition="100% 30%"
+              bgRepeat="no-repeat"
+              bgSize="cover"
+              textAlign="center"
+            >
+              <Link href={`trip/${continent.slug}`}>
+                <a>
+                  <Heading fontSize={["3xl","4xl","5xl"]} color="gray.100" fontWeight="bold">{continent.text}</Heading>
+                  <Text fontWeight="bold" color="gray.300" fontSize={["0.8rem","1xl", "2xl"]} mt={["2","4"]}>{' '}</Text>
+                </a>
+              </Link>
+            </Flex>
+          </SwiperSlide>
+        )) }
       </Swiper>
     </Flex>
   )

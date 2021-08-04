@@ -1,62 +1,58 @@
 import {
   Flex,
-  Stack,
   Image,
-  Text,
   SimpleGrid,
-  Heading,
   Center,
   useBreakpointValue,
 } from '@chakra-ui/react'
+import { ReactNode } from 'react'
 
-export const Banner = () => {
+type BannerProps = {
+  imagePrincipal: string,
+  grid: number[]
+  children?: ReactNode
+  isHome?: boolean
+  imageHighlight?: boolean,
+  height?: string
+}
+
+export const Banner = ({ 
+  imagePrincipal, 
+  grid,
+  height = '300px',
+  children = false, 
+  imageHighlight = false, 
+  isHome = false 
+}: BannerProps) => {
+
   const isMobileVersion = useBreakpointValue({
     base: true,
     lg: false,
   })
 
-  if (isMobileVersion) {
-    return (
-      <Flex w="100%" h="200px" pos="relative">
-        <Image w="100%" src="/background.png" />
-
-        <Center w="100%" h="100%" pos="absolute">
-          <Flex direction="column" align="center" justify="center" px="5">
-            <Stack spacing="5">
-              <Heading as="h2" fontSize="xl" color="white.50">
-                5 Continentes, <br /> infinitas possibilidades.
-              </Heading>
-              <Text fontSize="sm" color="white.300">
-                Chegou a hora de tirar do papel a viagem que você sempre sonhou.
-              </Text>
-            </Stack>
-          </Flex>
-        </Center>
-      </Flex>
-    )
-  }
-
   return (
-    <Flex w="100%" pos="relative">
-      <Image w="100%" src="/background.png" />
+    <Flex w="100%" h={['300px', '100%' ]} minHeight="300px" maxHeight={height} pos="relative">
+      <Image w="100%" objectFit="cover" src={`/${imagePrincipal}.png`} alt="Background" />
 
       <Center w="100%" h="100%" pos="absolute">
-        <SimpleGrid w="100%" columns={2}>
-          <Flex direction="column" align="center" justify="center">
-            <Stack spacing="5">
-              <Heading as="h2" fontSize="4xl" color="white.50">
-                5 Continentes, <br /> infinitas possibilidades.
-              </Heading>
-              <Text fontSize="xl" color="white.300">
-                Chegou a hora de tirar do papel a viagem que você <br /> sempre
-                sonhou.{' '}
-              </Text>
-            </Stack>
-          </Flex>
+        <SimpleGrid w="100%" columns={grid} px={4}>
 
-          <Flex align="center" direction="column" justify="center">
-            <Image src="/airplane.svg" pos="absolute" bottom="-8" />
-          </Flex>
+          { !isHome ? (
+            <Flex direction="column" align="center" justify="center">
+              { children }
+            </Flex>
+          ) : (
+            <Flex>
+              { children }
+            </Flex>
+          ) }
+
+          { !isMobileVersion && imageHighlight && (
+            <Flex align="center" direction="column" justify="center">
+              <Image src="/airplane.svg" pos="absolute" bottom="-8" alt="Avião" />
+            </Flex>
+          )  }
+
         </SimpleGrid>
       </Center>
     </Flex>
