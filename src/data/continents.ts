@@ -7,13 +7,13 @@ export const continents = [
   },
   {
     id: 2,
-    text: 'América do Norte;',
+    text: 'América do Norte',
     slug: 'america-do-norte',
     image: 'americaDoNortePage'
   },
   {
     id: 3,
-    text: 'América do Norte;',
+    text: 'América do Sul',
     slug: 'america-do-sul',
     image: 'americaDoSulPage'
   },

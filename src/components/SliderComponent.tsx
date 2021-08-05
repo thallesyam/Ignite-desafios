@@ -35,7 +35,7 @@ export const SliderComponent = () => {
               bgSize="cover"
               textAlign="center"
             >
-              <Link href={`trip/${continent.slug}`}>
+              <Link href={`/trip/${continent.slug}`}>
                 <a>
                   <Heading fontSize={["3xl","4xl","5xl"]} color="gray.100" fontWeight="bold">{continent.text}</Heading>
                   <Text fontWeight="bold" color="gray.300" fontSize={["0.8rem","1xl", "2xl"]} mt={["2","4"]}>{' '}</Text>
