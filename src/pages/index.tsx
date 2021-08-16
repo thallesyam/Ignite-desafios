@@ -58,8 +58,6 @@ export default function Home(): JSX.Element {
     return <Error />;
   }
 
-  console.log(formattedData);
-
   return (
     <>
       <Header />
