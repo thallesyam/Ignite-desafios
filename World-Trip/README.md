@@ -75,3 +75,4 @@ This project is under the MIT license. See the [LICENSE](LICENSE.md) for more in
 ---
 
 Made with ♥ by Thalles 👋🏻 [Get in touch!](https://www.linkedin.com/in/thalles-ian/)
+
