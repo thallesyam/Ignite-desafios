@@ -66,3 +66,4 @@ $ yarn dev
 ---
 
 <p>Feito com 💜 por Thalles Ian <a href="https://www.linkedin.com/in/thalles-ian/">Entre em contato!</a></p>
+
