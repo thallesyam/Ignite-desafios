@@ -1,0 +1,103 @@
+.hero {
+  margin-bottom: 4rem;
+  width: 100%;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    max-height: 25rem;
+  }
+}
+
+.post {
+  padding-bottom: 3rem;
+
+  h1 {
+    font-weight: bold;
+    font-size: 3rem;
+  }
+
+  footer {
+    margin-top: 1rem;
+
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+
+    time {
+      display: flex;
+      align-items: center;
+      color: var(--info);
+
+      & + svg {
+        margin-left: 1rem;
+      }
+    }
+
+    span {
+      display: block;
+      color: var(--info);
+      & + svg {
+        margin-left: 1rem;
+      }
+    }
+
+    svg {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.content {
+  margin-top: 4rem;
+  text-align: justify;
+
+  h2 {
+    font-weight: bold;
+    font-size: 2.25rem;
+  }
+
+  article {
+    margin: 2.25rem 0;
+  }
+}
+
+.lastEdit {
+  display: block;
+  margin-top: 1rem;
+
+  font-size: 0.875rem;
+  color: var(--info);
+  font-style: italic;
+}
+
+.navigatePost {
+  width: 100%;
+  position: relative;
+  font-size: 1.125rem;
+  padding: 3rem 0;
+  margin-bottom: 4rem;
+  border-top: 1px solid var(--text);
+
+  span {
+    color: var(--highlight);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .prevPost {
+    position: absolute;
+    left: 0;
+  }
+
+  .nextPost {
+    position: absolute;
+    right: 0;
+    text-align: right;
+  }
+}
